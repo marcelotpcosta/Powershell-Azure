@@ -1,12 +1,12 @@
-$sourceSubscriptionId='cdd5afd6-c1c6-4c56-8c77-edf30c4e0472'
+$sourceSubscriptionId=''
 
-$sourceResourceGroupName='RG-SharePointComercial'
+$sourceResourceGroupName=''
 
-$snapshotName='EXDADGNSR402-OSDisk_2018-06-18_Caso_00127628'
+$snapshotName=''
 
-$destinationSubscriptionId='fd3362a2-9173-419e-a06e-db6282bd9a2f'
+$destinationSubscriptionId=''
 
-$destinationResourceGroupName='Sharepoint_Desenvolvimento'
+$destinationResourceGroupName=''
 
 #2. Set the context of source Subscription ID
 Select-AzureRmSubscription -SubscriptionId $sourceSubscriptionId
