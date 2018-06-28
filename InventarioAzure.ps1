@@ -1,10 +1,10 @@
 <#
     .DESCRIPTION
-        An example runbook which gets all the ARM resources using the Run As Account (Service Principal)
+        An example runbook which gets all the ARM resources using the Run As Account
 
     .NOTES
-        AUTHOR: Azure Automation Team
-        LASTEDIT: Mar 14, 2016
+        AUTHOR: Marcelo Costa
+        LASTEDIT: 28/06/2018
 #>
 
 $connectionName = "AzureRunAsConnection"
@@ -40,7 +40,7 @@ foreach ($ResourceGroup in $ResourceGroups)
     $Resources = Get-AzureRmResource -ResourceGroupName $ResourceGroup.ResourceGroupName | Select Name, ResourceType, Location
     ForEach ($Resource in $Resources)
     {
-        Write-Output ($Resource.Name + " - " +  $Resource.ResourceType + " - " +  $Resource.Location) >> AllResources.txt
+        Write-Output ($Resource.Name + "," +  $Resource.ResourceType + "," +  $Resource.Location) >> AllResources.txt
     }
     Write-Output ("") >> AllResources.txt
     }
@@ -51,6 +51,6 @@ $data = (Get-Date).ToString()
 $assunto = “Report Azure”
 
 # Enviando e-mail com o relatório a partir do Office 365, dessa forma é necessário fazer a autenticação via TLS, utilize um e-mail valido, altere os campos em negrito com e-mail e senha
-$secpasswd = ConvertTo-SecureString “Clara@2018” -AsPlainText -Force
-$mycreds = New-Object System.Management.Automation.PSCredential (“no-reply@claranet.com.br”, $secpasswd)
-Send-MailMessage -To “Marcelo Costa <marcelo.costa@br.clara.net>” -SmtpServer “smtp.office365.com” -Credential $mycreds -UseSsl $assunto -Port “587” -Body $corpoemail -From “No Reply - Claranet Brasil <no-reply@claranet.com.br>” -BodyAsHtml -Attachments AllResources.txt
+$secpasswd = ConvertTo-SecureString “” -AsPlainText -Force
+$mycreds = New-Object System.Management.Automation.PSCredential (“”, $secpasswd)
+Send-MailMessage -To “ <>” -SmtpServer “” -Credential $mycreds -UseSsl $assunto -Port “587” -Body $corpoemail -From “ <>” -BodyAsHtml -Attachments AllResources.txt
