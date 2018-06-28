@@ -1,0 +1,24 @@
+$sourceSubscriptionId='cdd5afd6-c1c6-4c56-8c77-edf30c4e0472'
+
+$sourceResourceGroupName='RG-SharePointComercial'
+
+$snapshotName='EXDADGNSR402-OSDisk_2018-06-18_Caso_00127628'
+
+$destinationSubscriptionId='fd3362a2-9173-419e-a06e-db6282bd9a2f'
+
+$destinationResourceGroupName='Sharepoint_Desenvolvimento'
+
+#2. Set the context of source Subscription ID
+Select-AzureRmSubscription -SubscriptionId $sourceSubscriptionId
+
+#3. Get the snapshot
+$snapshot= Get-AzureRmSnapshot -ResourceGroupName $sourceResourceGroupName -Name $snapshotName
+
+#4. Set the context of the destination Subscription ID
+Select-AzureRmSubscription -SubscriptionId $destinationSubscriptionId
+
+#5. Instantiate the Snapshot Configuration
+$snapshotConfig = New-AzureRmSnapshotConfig -SourceResourceId $snapshot.Id -Location $snapshot.Location -CreateOption Copy
+
+#6. Instantiate new snaphot in destination subscription and resource group
+New-AzureRmSnapshot -Snapshot $snapshotConfig -SnapshotName $snapshotName -ResourceGroupName $destinationResourceGroupName
