@@ -26,11 +26,11 @@ $Recursos = Get-AzureRmLog -StartTime (Get-Date).AddDays(-1) | Select Subscripti
 $Recursos >> NovosRecursos.txt
 
 # Envia e-mail com o arquivo anexo!
-[string]$corpoemail = “Parece que deu certo tioz&atildeo.<br>Segue anexo com os recursos rec&eacute;m criados”
+[string]$corpoemail = “”
 $data = (Get-Date).ToString()
-$assunto = “Recursos criados nas suas subscriptions Azure em ” + $data
+$assunto = “” + $data
 
 # Enviando e-mail com o relatório a partir do Office 365, dessa forma é necessário fazer a autenticação via TLS, utilize um e-mail valido, altere os campos em negrito com e-mail e senha
-$secpasswd = ConvertTo-SecureString “Clara2018” -AsPlainText -Force
-$mycreds = New-Object System.Management.Automation.PSCredential (“report@claranet.com.br”, $secpasswd)
-Send-MailMessage -To “Marcelo Costa <marcelo.costa@br.clara.net>”, “Mauro Guimarães <mauro.guimaraes@br.clara.net>” -SmtpServer “smtp.office365.com” -Credential $mycreds -UseSsl $assunto -Port “587” -Body $corpoemail -From “Claranet Reports <report@claranet.com.br>” -BodyAsHtml -Attachments NovosRecursos.txt
+$secpasswd = ConvertTo-SecureString “” -AsPlainText -Force
+$mycreds = New-Object System.Management.Automation.PSCredential (“”, $secpasswd)
+Send-MailMessage -To “ <>”, “ <>” -SmtpServer “” -Credential $mycreds -UseSsl $assunto -Port “587” -Body $corpoemail -From “ <>” -BodyAsHtml -Attachments NovosRecursos.txt
