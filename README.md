@@ -1,1 +1,1 @@
-# Powerswhell-Azure
+# Powershell-Azure
